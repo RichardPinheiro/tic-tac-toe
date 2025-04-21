@@ -27,9 +27,9 @@ def player(board):
 
     for row in board:
         for cell in row:
-            if cell == X:
+            if cell is X:
                 countX += 1
-            if cell == O:
+            if cell is O:
                 countO += 1
 
     return X if countX == countO else O
@@ -39,7 +39,14 @@ def actions(board):
     """
     Returns set of all possible actions (i, j) available on the board.
     """
-    raise NotImplementedError
+    condinates = set()
+
+    for row_index, row in enumerate(board):
+        for cell_index, cell in enumerate(row):
+            if cell is EMPTY:
+                condinates.add((row_index, cell_index))
+
+    return condinates
 
 
 def result(board, action):
