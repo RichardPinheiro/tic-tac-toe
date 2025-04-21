@@ -26,10 +26,10 @@ def player(board):
     countO = 0
 
     for row in board:
-        for play in row:
-            if play == X:
+        for cell in row:
+            if cell == X:
                 countX += 1
-            if play == O:
+            if cell == O:
                 countO += 1
 
     return X if countX == countO else O
