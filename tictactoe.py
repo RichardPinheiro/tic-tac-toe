@@ -70,8 +70,56 @@ def winner(board):
     """
     Returns the winner of the game, if there is one.
     """
-    raise NotImplementedError
+    for check in (check_row_winner, check_col_winner, check_diagonal_winner):
+        result = check(board)
+        if result is not None:
+            return result
 
+    return None
+
+
+def check_row_winner(board):
+    """
+    Returns the winner in a row.
+    """
+    for row in board:
+        unique_row = set(row)
+        if len(unique_row) == 1 and EMPTY not in unique_row:
+            return row[0]
+
+    return None
+
+
+def check_col_winner(board):
+    """
+    Returns the winner in a col.
+    """
+    for i in range(3):
+        col = [board[0][i], board[1][i], board[2][i]]
+        unique_col = set(col)
+        if len(unique_col) == 1 and EMPTY not in unique_col:
+            return col[0]
+
+    return None
+
+
+def check_diagonal_winner(board):
+    """
+    Returns the winner in a diagonal.
+    """
+    diagonal_1 = [board[0][0], board[1][1], board[2][2]] # Top-left to bottom-right
+    diagonal_2 = [board[0][2], board[1][1], board[2][0]] # Top-right to bottom-left
+
+    unique_diagonal_1 = set(diagonal_1)
+    unique_diagonal_2 = set(diagonal_2)
+
+    if len(unique_diagonal_1) == 1 and EMPTY not in unique_diagonal_1:
+        return diagonal_1[0]
+
+    if len(unique_diagonal_2) == 1 and EMPTY not in unique_diagonal_2:
+        return diagonal_2[0]
+
+    raise None
 
 def terminal(board):
     """
