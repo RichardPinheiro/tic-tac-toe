@@ -156,4 +156,41 @@ def minimax(board):
     """
     Returns the optimal action for the current player on the board.
     """
-    raise NotImplementedError
+    if terminal(board):
+        return utility(board)
+
+    return maximize_score(board) if player(board) is X else minimize_score(board)
+
+
+def maximize_score(board):
+    """
+    Evaluates all possible moves and returns the action
+    that maximizes the utility score for player X.
+    """
+    best_score = float("-inf")
+
+    for action in actions(board):
+        board_result = result(board, action)
+        score = minimax(board_result)
+        if score > best_score:
+            best_score = score
+            best_action = action
+
+    return best_action
+
+
+def minimize_score(board):
+    """
+    Evaluates all possible moves and returns the action
+    that minimizes the utility score for player O.
+    """
+    best_score = float("inf")
+
+    for action in actions(board):
+        board_result = result(board, action)
+        score = minimax(board_result)
+        if score < best_score:
+            best_score = score
+            best_action = action
+
+    return best_action
