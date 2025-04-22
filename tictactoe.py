@@ -119,7 +119,7 @@ def check_diagonal_winner(board):
     if len(unique_diagonal_2) == 1 and EMPTY not in unique_diagonal_2:
         return diagonal_2[0]
 
-    raise None
+    return None
 
 def terminal(board):
     """
@@ -157,9 +157,10 @@ def minimax(board):
     Returns the optimal action for the current player on the board.
     """
     if terminal(board):
-        return utility(board)
+        return utility(board), None
 
-    return maximize_score(board) if player(board) is X else minimize_score(board)
+    _, action = maximize_score(board) if player(board) is X else minimize_score(board)
+    return action
 
 
 def maximize_score(board):
@@ -168,15 +169,16 @@ def maximize_score(board):
     that maximizes the utility score for player X.
     """
     best_score = float("-inf")
+    best_action = None
 
     for action in actions(board):
         board_result = result(board, action)
-        score = minimax(board_result)
+        score, _ = minimax(board_result)
         if score > best_score:
             best_score = score
             best_action = action
 
-    return best_action
+    return best_score, best_action
 
 
 def minimize_score(board):
@@ -185,12 +187,13 @@ def minimize_score(board):
     that minimizes the utility score for player O.
     """
     best_score = float("inf")
+    best_action = None
 
     for action in actions(board):
         board_result = result(board, action)
-        score = minimax(board_result)
+        score, _ = minimax(board_result)
         if score < best_score:
             best_score = score
             best_action = action
 
-    return best_action
+    return best_score, best_action
