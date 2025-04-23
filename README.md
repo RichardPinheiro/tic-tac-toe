@@ -8,8 +8,6 @@ This project is focused on building an AI agent that plays Tic-Tac-Toe optimally
 
 This AI is designed for a **deterministic**, **perfect-information**, **zero-sum** game environment — exactly the kind of scenario foundational to many classic AI problems.
 
-The AI agent uses **recursive adversarial search** (Minimax) to simulate every possible game state, evaluate outcomes, and always choose the best guaranteed move assuming an optimal opponent.
-
 > ⚠️ It will either win or draw — **never lose.**
 
 This project puts into practice key AI principles that scale to more complex problems like:
@@ -18,6 +16,36 @@ This project puts into practice key AI principles that scale to more complex pro
 - Real-time strategy AI
 - Tactical planning agents
 - Search-based decision systems
+
+---
+
+## 🧠 How the AI Model Works
+
+This project implements a **search-based AI reasoning model** using the **Minimax algorithm**. The AI evaluates every possible future board state recursively, reasoning through the game tree to make an optimal decision at every turn.
+
+Rather than using hardcoded rules or heuristics, this AI:
+- Simulates future outcomes for each possible move
+- Assigns utility values to terminal states (`1` win, `-1` loss, `0` draw)
+- Propagates scores backward through the tree
+- Chooses the move that maximizes or minimizes utility, depending on the current player
+
+This structure reflects how early AI systems approached complex decision-making problems before learning-based systems became dominant.
+
+### ✨ Model Architecture
+
+Internally, the model uses:
+- A **public interface** (`minimax`) to return the optimal move
+- A **private recursive engine** (`_minimax_internal`) that evaluates both score and action
+- Separate functions for the **maximizing** and **minimizing** player decisions
+- Pure functions (no mutation), ensuring every recursion is safe and predictable
+
+This mirrors architectures used in:
+- Turn-based tactical games
+- Board game engines (chess, checkers)
+- Symbolic planning systems
+- Automated decision pipelines
+
+> 🧠 The AI does not "react" — it **reasons**.
 
 ---
 
@@ -46,7 +74,7 @@ This project puts into practice key AI principles that scale to more complex pro
 
 | File            | Description                                 |
 |-----------------|---------------------------------------------|
-| `tictactoe.py`  | AI logic, game rules, and core functionality|
+| `model.py`  | AI logic, game rules, and core functionality|
 | `runner.py`     | Simple UI to play against the AI (via Pygame)|
 | `requirements.txt` | Project dependencies (mainly `pygame`)   |
 

@@ -1,5 +1,5 @@
 """
-Tic Tac Toe Player
+Tic Tac Toe Model
 """
 
 import copy
