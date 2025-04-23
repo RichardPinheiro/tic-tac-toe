@@ -4,6 +4,18 @@ This project is focused on building an AI agent that plays Tic-Tac-Toe optimally
 
 ---
 
+## 📚 Table of Contents
+
+- [🧠 Project Overview](#-project-overview)
+- [🧠 How the AI Model Works](#-how-the-ai-model-works)
+- [✨ Model Architecture](#-model-architecture)
+- [🛠️ Features](#-features)
+- [🧪 AI Concepts Applied](#-ai-concepts-applied)
+- [📁 Project Structure](#-project-structure)
+- [🚀 Getting Started](#-getting-started)
+
+---
+
 ## 🧠 Project Overview
 
 This AI is designed for a **deterministic**, **perfect-information**, **zero-sum** game environment — exactly the kind of scenario foundational to many classic AI problems.
