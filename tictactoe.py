@@ -106,8 +106,8 @@ def check_diagonal_winner(board):
     """
     Returns the winner in a diagonal.
     """
-    diagonal_1 = [board[0][0], board[1][1], board[2][2]] # Top-left to bottom-right
-    diagonal_2 = [board[0][2], board[1][1], board[2][0]] # Top-right to bottom-left
+    diagonal_1 = [board[0][0], board[1][1], board[2][2]]  # Top-left to bottom-right
+    diagonal_2 = [board[0][2], board[1][1], board[2][0]]  # Top-right to bottom-left
 
     unique_diagonal_1 = set(diagonal_1)
     unique_diagonal_2 = set(diagonal_2)
@@ -156,6 +156,17 @@ def minimax(board):
     Returns the optimal action for the current player on the board.
     """
     if terminal(board):
+        return None
+
+    _, action = _minimax_internal(board)
+    return action
+
+
+def _minimax_internal(board):
+    """
+    Returns the optimal (score, action) tuple for the current player on the board.
+    """
+    if terminal(board):
         return utility(board), None
 
     return maximize_score(board) if player(board) == X else minimize_score(board)
@@ -163,7 +174,7 @@ def minimax(board):
 
 def maximize_score(board):
     """
-    Evaluates all possible moves and returns the action
+    Evaluates all possible moves and returns (score, action) tuple
     that maximizes the utility score for player X.
     """
     best_score = float("-inf")
@@ -171,7 +182,7 @@ def maximize_score(board):
 
     for action in actions(board):
         board_result = result(board, action)
-        score, _ = minimax(board_result)
+        score, _ = _minimax_internal(board_result)
         if score > best_score:
             best_score = score
             best_action = action
@@ -181,7 +192,7 @@ def maximize_score(board):
 
 def minimize_score(board):
     """
-    Evaluates all possible moves and returns the action
+    Evaluates all possible moves and returns (score, action) tuple
     that minimizes the utility score for player O.
     """
     best_score = float("inf")
@@ -189,7 +200,7 @@ def minimize_score(board):
 
     for action in actions(board):
         board_result = result(board, action)
-        score, _ = minimax(board_result)
+        score, _ = _minimax_internal(board_result)
         if score < best_score:
             best_score = score
             best_action = action
