@@ -5,7 +5,7 @@ import time
 import tictactoe as ttt
 
 pygame.init()
-size = width, height = 600, 400
+size = width, height = 1200, 700
 
 # Colors
 black = (0, 0, 0)
@@ -67,7 +67,7 @@ while True:
     else:
 
         # Draw game board
-        tile_size = 80
+        tile_size = 150
         tile_origin = (width / 2 - (1.5 * tile_size),
                        height / 2 - (1.5 * tile_size))
         tiles = []
