@@ -102,7 +102,7 @@ while True:
         elif user == player:
             title = f"Play as {user}"
         else:
-            title = f"Computer thinking..."
+            title = f"AI Model Reasoning..."
         title = largeFont.render(title, True, white)
         titleRect = title.get_rect()
         titleRect.center = ((width / 2), 30)
@@ -112,7 +112,7 @@ while True:
         if user != player and not game_over:
             if ai_turn:
                 time.sleep(0.5)
-                move = ttt.minimax(board)
+                _, move = ttt.minimax(board)
                 board = ttt.result(board, move)
                 ai_turn = False
             else:

@@ -2,7 +2,6 @@
 Tic Tac Toe Player
 """
 
-import math
 import copy
 
 X = "X"
@@ -146,10 +145,10 @@ def utility(board):
     """
     result = winner(board)
 
-    if result is None:
+    if result == None:
         return 0
 
-    return 1 if result is X else -1
+    return 1 if result == X else -1
 
 
 def minimax(board):
@@ -159,8 +158,7 @@ def minimax(board):
     if terminal(board):
         return utility(board), None
 
-    _, action = maximize_score(board) if player(board) is X else minimize_score(board)
-    return action
+    return maximize_score(board) if player(board) == X else minimize_score(board)
 
 
 def maximize_score(board):
