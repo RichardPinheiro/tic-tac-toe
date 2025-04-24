@@ -2,6 +2,8 @@ import pygame
 import sys
 import time
 
+import utils.game_logic as game
+
 # import models.minimax as model
 import models.alpha_beta as model
 
@@ -19,7 +21,7 @@ largeFont = pygame.font.Font("OpenSans-Regular.ttf", 40)
 moveFont = pygame.font.Font("OpenSans-Regular.ttf", 60)
 
 user = None
-board = model.initial_state()
+board = game.initial_state()
 ai_turn = False
 
 while True:
@@ -60,10 +62,10 @@ while True:
             mouse = pygame.mouse.get_pos()
             if playXButton.collidepoint(mouse):
                 time.sleep(0.2)
-                user = model.X
+                user = game.X
             elif playOButton.collidepoint(mouse):
                 time.sleep(0.2)
-                user = model.O
+                user = game.O
 
     else:
 
@@ -82,7 +84,7 @@ while True:
                 )
                 pygame.draw.rect(screen, white, rect, 3)
 
-                if board[i][j] != model.EMPTY:
+                if board[i][j] != game.EMPTY:
                     move = moveFont.render(board[i][j], True, white)
                     moveRect = move.get_rect()
                     moveRect.center = rect.center
@@ -90,12 +92,12 @@ while True:
                 row.append(rect)
             tiles.append(row)
 
-        game_over = model.terminal(board)
-        player = model.player(board)
+        game_over = game.terminal(board)
+        player = game.player(board)
 
         # Show title
         if game_over:
-            winner = model.winner(board)
+            winner = game.winner(board)
             if winner is None:
                 title = f"Game Over: Tie."
             else:
@@ -115,7 +117,7 @@ while True:
                 time.sleep(0.5)
                 # move = model.minimax(board)
                 move = model.alpha_beta_move(board)
-                board = model.result(board, move)
+                board = game.result(board, move)
                 ai_turn = False
             else:
                 ai_turn = True
@@ -126,8 +128,8 @@ while True:
             mouse = pygame.mouse.get_pos()
             for i in range(3):
                 for j in range(3):
-                    if (board[i][j] == model.EMPTY and tiles[i][j].collidepoint(mouse)):
-                        board = model.result(board, (i, j))
+                    if (board[i][j] == game.EMPTY and tiles[i][j].collidepoint(mouse)):
+                        board = game.result(board, (i, j))
 
         if game_over:
             againButton = pygame.Rect(width / 3, height - 65, width / 3, 50)
@@ -142,7 +144,7 @@ while True:
                 if againButton.collidepoint(mouse):
                     time.sleep(0.2)
                     user = None
-                    board = model.initial_state()
+                    board = game.initial_state()
                     ai_turn = False
 
     pygame.display.flip()
