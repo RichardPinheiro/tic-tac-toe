@@ -26,7 +26,6 @@ def alpha_beta_move(board):
     print(f"Total branches pruned in turn {turn}: {prune_count}")
     return action
 
-
 def alpha_beta_search(board, alpha, beta):
     """
     Returns the optimal (score, action) tuple for the current player on the board.
@@ -34,7 +33,6 @@ def alpha_beta_search(board, alpha, beta):
     if terminal(board):
         return utility(board), None
     return maximize_alpha_beta(board, alpha, beta) if player(board) == X else minimize_alpha_beta(board, alpha, beta)
-
 
 def maximize_alpha_beta(board, alpha, beta):
     """
@@ -56,7 +54,6 @@ def maximize_alpha_beta(board, alpha, beta):
             prune_count += 1
             break
     return best_score, best_action
-
 
 def minimize_alpha_beta(board, alpha, beta):
     """
