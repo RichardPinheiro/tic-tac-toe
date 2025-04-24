@@ -10,7 +10,6 @@ def minimax(board):
     """
     if terminal(board):
         return None
-
     _, action = _minimax_internal(board)
     return action
 
@@ -21,7 +20,6 @@ def _minimax_internal(board):
     """
     if terminal(board):
         return utility(board), None
-
     return maximize_score(board) if player(board) == X else minimize_score(board)
 
 
@@ -32,14 +30,12 @@ def maximize_score(board):
     """
     best_score = float("-inf")
     best_action = None
-
     for action in actions(board):
         board_result = result(board, action)
         score, _ = _minimax_internal(board_result)
         if score > best_score:
             best_score = score
             best_action = action
-
     return best_score, best_action
 
 
@@ -50,12 +46,10 @@ def minimize_score(board):
     """
     best_score = float("inf")
     best_action = None
-
     for action in actions(board):
         board_result = result(board, action)
         score, _ = _minimax_internal(board_result)
         if score < best_score:
             best_score = score
             best_action = action
-
     return best_score, best_action
