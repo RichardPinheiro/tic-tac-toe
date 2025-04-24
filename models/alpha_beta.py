@@ -1,5 +1,5 @@
 """
-Tic Tac Toe Model
+Alpha-Beta Model
 """
 
 import copy
@@ -7,6 +7,9 @@ import copy
 X = "X"
 O = "O"
 EMPTY = None
+
+prune_count = 0
+turn = 0
 
 
 def initial_state():
@@ -39,14 +42,14 @@ def actions(board):
     """
     Returns set of all possible actions (i, j) available on the board.
     """
-    condinates = set()
+    coordinates = set()
 
     for row_index, row in enumerate(board):
         for cell_index, cell in enumerate(row):
             if cell is EMPTY:
-                condinates.add((row_index, cell_index))
+                coordinates.add((row_index, cell_index))
 
-    return condinates
+    return coordinates
 
 
 def result(board, action):
@@ -145,64 +148,85 @@ def utility(board):
     """
     result = winner(board)
 
-    if result == None:
+    if result is None:
         return 0
 
     return 1 if result == X else -1
 
 
-def minimax(board):
+def alpha_beta_move(board):
     """
-    Returns the optimal action for the current player on the board.
+    Returns the optimal move for the current player using Alpha-Beta Pruning.
+    This is the public entry point that initializes alpha and beta bounds
+    and triggers the pruning-aware recursive evaluation engine.
     """
+    alpha = float("-inf")
+    beta = float("inf")
+    global prune_count
+    prune_count = 0  # Reset count for this turn
+    global turn
+    turn += 1
+
     if terminal(board):
         return None
 
-    _, action = _minimax_internal(board)
+    _, action = alpha_beta_search(board, alpha, beta)
+    print(f"Total branches pruned in turn {turn}: {prune_count}")
+
     return action
 
 
-def _minimax_internal(board):
+def alpha_beta_search(board, alpha, beta):
     """
     Returns the optimal (score, action) tuple for the current player on the board.
     """
     if terminal(board):
         return utility(board), None
 
-    return maximize_score(board) if player(board) == X else minimize_score(board)
+    return maximize_alpha_beta(board, alpha, beta) if player(board) == X else minimize_alpha_beta(board, alpha, beta)
 
 
-def maximize_score(board):
+def maximize_alpha_beta(board, alpha, beta):
     """
-    Evaluates all possible moves and returns (score, action) tuple
+    Evaluates the best possible move and returns the (score, action) tuple
     that maximizes the utility score for player X.
     """
     best_score = float("-inf")
     best_action = None
+    global prune_count
 
     for action in actions(board):
         board_result = result(board, action)
-        score, _ = _minimax_internal(board_result)
+        score, _ = alpha_beta_search(board_result, alpha, beta)
         if score > best_score:
             best_score = score
             best_action = action
+        alpha = max(alpha, best_score)
+        if alpha >= beta:
+            prune_count += 1
+            break
 
     return best_score, best_action
 
 
-def minimize_score(board):
+def minimize_alpha_beta(board, alpha, beta):
     """
-    Evaluates all possible moves and returns (score, action) tuple
+    Evaluates the best possible move and returns the (score, action) tuple
     that minimizes the utility score for player O.
     """
     best_score = float("inf")
     best_action = None
+    global prune_count
 
     for action in actions(board):
         board_result = result(board, action)
-        score, _ = _minimax_internal(board_result)
+        score, _ = alpha_beta_search(board_result, alpha, beta)
         if score < best_score:
             best_score = score
             best_action = action
+        beta = min(beta, best_score)
+        if beta <= alpha:
+            prune_count += 1
+            break
 
     return best_score, best_action

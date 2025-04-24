@@ -39,14 +39,14 @@ def actions(board):
     """
     Returns set of all possible actions (i, j) available on the board.
     """
-    condinates = set()
+    coordinates = set()
 
     for row_index, row in enumerate(board):
         for cell_index, cell in enumerate(row):
             if cell is EMPTY:
-                condinates.add((row_index, cell_index))
+                coordinates.add((row_index, cell_index))
 
-    return condinates
+    return coordinates
 
 
 def result(board, action):
