@@ -74,13 +74,14 @@ This mirrors architectures used in:
 
 ## 🧪 AI Concepts Applied
 
-| Concept                  | Description                                                 |
-|--------------------------|-------------------------------------------------------------|
-| **Minimax Algorithm**    | Explores all possible game outcomes to minimize loss        |
-| **Adversarial Search**   | Assumes opponent plays optimally                            |
-| **Game Trees**           | Builds complete decision paths for each player              |
-| **Utility Evaluation**   | Assigns numeric scores to terminal states                   |
-| **Turn-Based Simulation**| Alternates player turns based on board state                |
+| Concept                   | Description                                                      |
+|---------------------------|------------------------------------------------------------------|
+| **Minimax Algorithm**     | Explores all possible game outcomes to minimize loss             |
+| **Alpha-Beta Pruning**    | Prunes suboptimal branches to reduce computation without impact  |
+| **Adversarial Search**    | Assumes opponent plays optimally                                 |
+| **Game Trees**            | Builds complete decision paths for each player                   |
+| **Utility Evaluation**    | Assigns numeric scores to terminal states                        |
+| **Turn-Based Simulation** | Alternates player turns based on board state                     |
 
 ---
 
