@@ -1,5 +1,7 @@
 # 🎮 Tic-Tac-Toe AI
 
+![AI Agent playing Tic-Tac-Toe](assets/images/tic-tac-toe-ai.png)
+
 This project is focused on building an AI agent that plays Tic-Tac-Toe optimally using the **Minimax algorithm**.
 
 ---
