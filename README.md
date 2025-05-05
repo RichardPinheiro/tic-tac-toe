@@ -9,8 +9,8 @@ This project is focused on building an AI agent that plays Tic-Tac-Toe optimally
 ## 📚 Table of Contents
 
 - [🧠 Project Overview](#-project-overview)
-- [🧠 How the AI Model Works](#-how-the-ai-model-works)
-- [✨ Model Architecture](#-model-architecture)
+- [🧠 How the AI Agent Works](#-how-the-ai-agent-works)
+- [✨ Reasoning Architecture](#-reasoning-architecture)
 - [🛠️ Features](#-features)
 - [🧪 AI Concepts Applied](#-ai-concepts-applied)
 - [📁 Project Structure](#-project-structure)
@@ -33,9 +33,9 @@ This project puts into practice key AI principles that scale to more complex pro
 
 ---
 
-## 🧠 How the AI Model Works
+## 🧠 How the AI Agent Works
 
-This project implements a **search-based AI reasoning model** using the **Minimax algorithm**. The AI evaluates every possible future board state recursively, reasoning through the game tree to make an optimal decision at every turn.
+This project implements a **search-based AI reasoning agent** using the **Minimax algorithm**. The AI evaluates every possible future board state recursively, reasoning through the game tree to make an optimal decision at every turn.
 
 Rather than using hardcoded rules or heuristics, this AI:
 - Simulates future outcomes for each possible move
@@ -45,9 +45,9 @@ Rather than using hardcoded rules or heuristics, this AI:
 
 This structure reflects how early AI systems approached complex decision-making problems before learning-based systems became dominant.
 
-### ✨ Model Architecture
+### ✨ Reasoning Architecture
 
-Internally, the model uses:
+Internally, the Ai agent uses:
 - A **public interface** (`minimax`) to return the optimal move
 - A **private recursive engine** (`_minimax_internal`) that evaluates both score and action
 - Separate functions for the **maximizing** and **minimizing** player decisions
@@ -88,8 +88,10 @@ This mirrors architectures used in:
 
 | File            | Description                                 |
 |-----------------|---------------------------------------------|
-| `model.py`  | AI logic, game rules, and core functionality|
-| `runner.py`     | Simple UI to play against the AI (via Pygame)|
+| `agents/alpha_beta.py`  | AI agent that uses the Alpha-Beta Pruning strategy for optimal decision-making |
+| `agents/minimax.py`  | AI agent that uses the Mimimax strategy for optimal decision-making |
+| `utils/game_logic.py`  | Implements game rules and shared logic for the AI agent |
+| `runner.py`     | Simple UI to play against the AI (via Pygame) |
 | `requirements.txt` | Project dependencies (mainly `pygame`)   |
 
 ---

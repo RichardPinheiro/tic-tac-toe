@@ -4,8 +4,8 @@ import time
 
 import utils.game_logic as game
 
-# import models.minimax as model
-import models.alpha_beta as model
+# import agents.minimax as agent
+import agents.alpha_beta as agent
 
 pygame.init()
 size = width, height = 1200, 700
@@ -117,8 +117,8 @@ while True:
         if user != player and not game_over:
             if ai_turn:
                 time.sleep(0.5)
-                # move = model.minimax(board)
-                move = model.alpha_beta_move(board)
+                # move = agent.minimax(board)
+                move = agent.alpha_beta_move(board)
                 board = game.result(board, move)
                 ai_turn = False
             else:
